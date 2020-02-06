@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration scan="true" scanPeriod="10 seconds">
+	
+	<property resource="application.properties" />
+    
+	<appender class="ch.qos.logback.core.ConsoleAppender" name="STDOUT">
+		<!--encoder>
+			<pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36}.%M - %msg%n</pattern>
+		</encoder-->
+		<encoder>
+			<pattern>%d{MM-dd-yy HH:mm:ss.SSS} [%thread] %-5level [%33.33logger{5}]: %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<appender class="ch.qos.logback.core.rolling.RollingFileAppender" name="FILE">
+		<file>${mca-home}/logs/mca.log</file>
+		<append>true</append>
+		<encoder>
+			<pattern>%d{MM-dd-yy HH:mm:ss.SSS} [%thread] %-5level [%33.33logger{5}]: %msg%n</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${mca-home}/logs/mca-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+			<maxHistory>5<!-- days --></maxHistory>
+			<totalSizeCap>1GB</totalSizeCap>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>20MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender>	
+
+	<logger level="WARN" name="org.springframework"/>
+	<logger level="WARN" name="org.apache"/>
+	<logger level="WARN" name="org.thymeleaf"/>
+	<logger level="WARN" name="com.sun.jersey"/>
+	<logger level="WARN" name="com.sun.jersey"/>
+	<logger level="WARN" name="io.swagger"/>
+	<logger level="WARN" name="org.hibernate.validator"/>
+
+	<logger level="INFO" name="com.couchbase.client"/>
+	<logger level="DEBUG" name="com.couchbase.client.mc"/>
+	<!--logger level="DEBUG" name="org.springframework.data.couchbase.repository.query" /-->
+	<logger level="DEBUG" name="org.springframework.data.couchbase.repository" />
+    <!--logger level="DEBUG" name="com.couchbase.client"/>
+	<logger level="DEBUG" name="com.couchbase.client.mc"/>
+	<logger level="DEBUG" name="org.springframework.data.couchbase.repository.query" /-->
+	
+	<!--logger level="off" name="com.couchbase.client.core.endpoint.Endpoint" /-->
+	<logger level="INFO" name="com.couchbase.client.core" />
+	<logger level="INFO" name="com.couchbase.client.core.endpoint" />
+    <logger level="error" name="com.couchbase.client.core.env.CoreEnvironment" />
+	
+	<root level="DEBUG">
+	    <appender-ref ref="FILE"/>		
+		<appender-ref ref="STDOUT"/>
+	</root>
+	<springProfile name="LOCAL">	
+		<root level="DEBUG">
+		    <appender-ref ref="FILE"/>
+			<appender-ref ref="STDOUT"/>
+		</root>
+	</springProfile>
+	
+</configuration>

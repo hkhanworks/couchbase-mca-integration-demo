@@ -1,0 +1,9 @@
+-----------------------------------------------------------------------------------------------------------------------------
+Application Name : Couchbase MCA Proof Of Concept (POC)
+Application Version : ${application.version}
+Application Formatted Version : ${application.formatted-version}
+Spring Boot Version : ${spring-boot-version}
+Spring Boot Formatted Version : ${spring-boot.formatted-version}
+-----------------------------------------------------------------------------------------------------------------------------
+${AnsiBackground.WHITE}${AnsiColor.RED}	 Couchbase HA/DR - High Availability/Disaster Recover - Multi-Cluster Aware (MCA) POC
+-----------------------------------------------------------------------------------------------------------------------------
